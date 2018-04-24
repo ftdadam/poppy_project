@@ -20,14 +20,14 @@ current_winner = empty
 
 # ===== Image constrains =====
 
-img = Image.new( 'RGB', (600,700), "white")
+img = Image.new( 'RGB', (276,500), "white")
 pixels = img.load() # create the pixel map
 black = (0,0,0)
 yellow = (255,221,0)
 blue = (3,78,162)
-board_x_lim = 600
-board_y_lim = 600
-line_tickness = 6
+board_x_lim = 276
+board_y_lim = 276
+line_tickness = 4
 
 def play(row,col,board,n_play,current_player,current_winner,poppy,empty):
     if(current_winner == empty):
@@ -84,7 +84,7 @@ def set_poppy_player(player_1,player_2):
     return int(n_player_for_poppy)
 
 def reset(player_1,player_2,empty):
-    global current_player, current_winner, , board, n_play
+    global current_player, current_winner, board, n_play
     current_player = player_1
     current_winner = empty
     board = [[empty for x in range(w)] for y in range(h)]
@@ -140,6 +140,9 @@ WIDTH, HEIGHT = screen.width, screen.height
 
 windowSurface = pygame.display.set_mode((0,0), pygame.FULLSCREEN, 32)
 
+x_pos = 750
+y_pos = 150
+
 gameExit = True
 while gameExit:
     events = pygame.event.get()
@@ -149,12 +152,13 @@ while gameExit:
                 gameExit = False
             if event.key == pygame.K_q:
                 draw_board(pixels,board)
-                windowSurface.blit(pygame.image.load("board.png"), (450, 50))
+                board = [['X', 'O', 'X'], [' ', ' ', ' '], [' ', ' ', ' ']]
+                windowSurface.blit(pygame.image.load("board.png"), (x_pos, y_pos))
                 pygame.display.flip()
             if event.key == pygame.K_SPACE:
-                n_play = reset(empty,player_1,player_2)
+                # reset(empty,player_1,player_2)
                 init_board(img, pixels)
-                windowSurface.blit(pygame.image.load("board.png"), (450, 50))
+                windowSurface.blit(pygame.image.load("board.png"), (x_pos, y_pos))
                 pygame.display.flip()
 
 pygame.quit()
