@@ -30,28 +30,24 @@ board_y_lim = 276
 line_tickness = 4
 
 def play(row,col,board,n_play,current_player,current_winner,poppy,empty):
-    if(current_winner == empty):
-        if(board [row][col] == empty):
-            n_play = n_play+1
-            board [row][col] = current_player
-            if(check_win(current_player, board)):
-                print "Winner: " + str(current_player) + ", reset the game"
-                current_winner = current_player
-            else:
-                if(n_play < 9):
-                    if(current_player == player_1):
-                        current_player = player_2
-                    else:
-                        current_player = player_1
-                else:
-                    print "Tie, reset the game"
-                    current_winner = 'None'
-            print_board()
-        else:
-            if(current_player != poppy):
-                print  "Already taken! Try again"
-    else:
-        print "Winner: " + str(current_player) + ", reset the game"
+	if(current_winner == empty):
+		n_play = n_play+1
+		board [row][col] = current_player
+		if(check_win()):
+			print "Winner: " + str(current_player) + ", reset the game"
+			current_winner = current_player
+		else:
+			if(n_play < 9):
+				if(current_player == player_1):
+					current_player = player_2
+				else:
+					current_player = player_1
+			else:
+				print "Tie, reset the game"
+				current_winner = 'None'
+		print_board()
+	else:
+		print "Winner: " + str(current_player) + ", reset the game"
 
 def validate_poppy_move(row,col,board,empty):
     if(board [row][col] == empty):
