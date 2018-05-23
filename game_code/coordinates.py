@@ -4,7 +4,11 @@ from ikpy import plot_utils
 
 target_vector = [ 0.1, -0.2, 0.1]
 target_frame = np.eye(4)
+
+print target_frame
 target_frame[:3, 3] = target_vector
+
+
 
 my_chain = ikpy.chain.Chain.from_urdf_file("poppy_torso.URDF")
 
