@@ -1,7 +1,7 @@
 
 # Script 
 # This script takes the robot to an rest position until waits for another order 
-# Author: ABT, Juan Francisco. DADAM, Federico
+# Author: ABT, Juan Francisco &  DADAM, Federico
 # Date: May 2018
 
 #id 0 Motor abs_z, id=33
@@ -49,18 +49,53 @@ for m in poppy.motors:
 #time.sleep(1)
 while(bucle):
 	command = int(raw_input("Position << "))
-	if (command == 0):
-		motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
-		mov_time = 2
-	elif (command == 1):
+	if (command == 0): #inicial
+		motor_angles = [0,0,45,0,5,-5,0,-10,15,20,-10,-180,0,-20,0]
+		mov_time = 1.3
+	elif (command == 1): #inicial piezas
+		motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-177.16,2.18,-21.14,-25.91]
+		mov_time = 1.3
+	elif (command == 2):
 		motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-127.14,3.67,-0.31,68.42]
-		mov_time = 2
+		mov_time = 1.3
+	elif (command == 3): 
+		motor_angles = [-18.68, 3.99, 52.35, -2.59, 4.7, -5.13, 16.51, -13.82, 18.4, 51.21, -76.46, -150.7, -3.27, -0.84, 40.7] 
+		mov_time = 1.3
+	elif(command == 4):  #medio
+		motor_angles = [23.08,-4.1,50.68,-2.86,16.57,-9.53,10.06,-4.95,11.01,-25.63,-76.81,-133.91,-1.34,17.98,49.16]
+		mov_time = 1.3
+	elif(command == 5):  #dab
+		motor_angles = [8.57,0.74,50.15,-14.81,19.82,-80.79,8.01,-92.33,98.84,-105.19,67.36,-95.32,12.81,77.23,-3.58]
+		mov_time = 1.3
+
+	elif(command == 6):  #agarrar 
+		motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-127.14,3.67,-0.31,68.42]
+		mov_time = 1.3
 	elif (command == 99):
 		electromagnet_control(electromagnet,1)
+
 	elif (command == 100):
 		electromagnet_control(electromagnet,0)
+
 	elif(command == 69):
 		bucle=False
+
+	elif(command == -1):
+		print poppy.motors
+
+	elif(command == -2):
+		for m in poppy.motors:
+			m.compliant=True
+
+	elif(command == -3): 
+		for m in poppy.motors:
+			m.compliant=False
+
+	elif(command == -4):
+		poppy.motors[11].compliant=True
+		poppy.motors[12].compliant=True
+		poppy.motors[13].compliant=True
+		poppy.motors[14].compliant=True
 	else:
 		print "Wrong command, setting initial position"
 		motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
@@ -81,5 +116,5 @@ while(bucle):
 		poppy.motors[12].goto_position(motor_angles[12],mov_time)
 		poppy.motors[13].goto_position(motor_angles[13],mov_time)
 		poppy.motors[14].goto_position(motor_angles[14],mov_time)
-		time.sleep(3)
+		time.sleep(1.5)
 	
