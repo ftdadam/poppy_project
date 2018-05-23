@@ -66,9 +66,20 @@ while(bucle):
 		motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
 		mov_time = 2
 	if(bucle):
-		for ptr in range(0,15):
-			poppy.motors[ptr].goto_position(motor_angles[ptr],mov_time)
-			time.sleep(0.2)
-	
+		poppy.motors[0].goto_position(motor_angles[0],mov_time)
+		poppy.motors[1].goto_position(motor_angles[1],mov_time)
+		poppy.motors[2].goto_position(motor_angles[2],mov_time)
+		poppy.motors[3].goto_position(motor_angles[3],mov_time)
+		poppy.motors[4].goto_position(motor_angles[4],mov_time)
+		poppy.motors[5].goto_position(motor_angles[5],mov_time)
+		poppy.motors[6].goto_position(motor_angles[6],mov_time)
+		poppy.motors[7].goto_position(motor_angles[7],mov_time)
+		poppy.motors[8].goto_position(motor_angles[8],mov_time)
+		poppy.motors[9].goto_position(motor_angles[9],mov_time)
+		poppy.motors[10].goto_position(motor_angles[10],mov_time)
+		poppy.motors[11].goto_position(motor_angles[11],mov_time)
+		poppy.motors[12].goto_position(motor_angles[12],mov_time)
+		poppy.motors[13].goto_position(motor_angles[13],mov_time)
+		poppy.motors[14].goto_position(motor_angles[14],mov_time)
 		time.sleep(3)
 	
