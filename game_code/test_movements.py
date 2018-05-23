@@ -23,7 +23,9 @@
 
 import time
 from pypot.robot import from_json
-import grovepi 
+# from grovepi import *
+
+bucle=True 
 
 def electromagnet_control(electromagnet,state):
 	try:
@@ -41,32 +43,32 @@ for m in poppy.motors:
 	m.compliant=False
 
 # set grovepi+ port 4 as output
-electromagnet = 4
-pinMode(electromagnet,"OUTPUT")
-time.sleep(1)
 
-# create the robot object
-
-
-# All motors are  compliant mode
-
-command = int(raw_input("Position << "))
-if (command == 0):
-	motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
-	mov_time = 2
-elif (command == 1):
-	motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-127.14,3.67,-0.31,68.42]
-	mov_time = 2
-elif (command == 99):
-	electromagnet_control(electromagnet,1)
-elif (command == 100):
-	electromagnet_control(electromagnet,0)
-else:
-	print "Wrong command, setting initial position"
-	motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
-	mov_time = 2
-
-for ptr in range(0,15):
-	poppy.motors[ptr].goto_position(motor_angles[ptr],mov_time)
-	time.sleep(0.2)
-time.sleep(3)
+#electromagnet = 4
+#pinMode(electromagnet,"OUTPUT")
+#time.sleep(1)
+while(bucle):
+	command = int(raw_input("Position << "))
+	if (command == 0):
+		motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
+		mov_time = 2
+	elif (command == 1):
+		motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-127.14,3.67,-0.31,68.42]
+		mov_time = 2
+	elif (command == 99):
+		electromagnet_control(electromagnet,1)
+	elif (command == 100):
+		electromagnet_control(electromagnet,0)
+	elif(command == 69):
+		bucle=False
+	else:
+		print "Wrong command, setting initial position"
+		motor_angles = [0,0,45,0,5,-5,0,10,15,20,-10,-180,0,-20,0]
+		mov_time = 2
+	if(bucle):
+		for ptr in range(0,15):
+			poppy.motors[ptr].goto_position(motor_angles[ptr],mov_time)
+			time.sleep(0.2)
+	
+		time.sleep(3)
+	
