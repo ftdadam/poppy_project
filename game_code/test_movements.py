@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Script 
 # This script takes the robot to an rest position until waits for another order 
 # Author: ABT, Juan Francisco. DADAM, Federico
@@ -56,9 +58,9 @@ if (command == 0):
 elif (command == 1):
 	motor_angles = [-25.63,-2.43,44.97,9.63,5.41,-4.25,16.8,-13.82,18.4,51.21,-76.46,-127.14,3.67,-0.31,68.42]
 	mov_time = 2
-elif (command = 99):
+elif (command == 99):
 	electromagnet_control(electromagnet,1)
-elif (command = 100):
+elif (command == 100):
 	electromagnet_control(electromagnet,0)
 else:
 	print "Wrong command, setting initial position"
