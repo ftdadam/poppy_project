@@ -34,7 +34,7 @@ def electromagnet_control(electromagnet,state):
 		digitalWrite(electromagnet,0)
 	except IOError:
 		digitalWrite(electromagnet,0)
-	    print ("Error")
+		print ("Error")
 
 poppy=from_json("/home/poppy/miniconda/lib/python2.7/site-packages/poppy_torso/configuration/poppy_torso_new.json")
 
