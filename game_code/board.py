@@ -12,8 +12,6 @@ from kivy.config import Config
 Config.set('input','Reactable','tuio,127.0.0.1:3333')
 
 class Table(GridLayout):
-
-
 	def __init__(self, **kwargs):
 		super(Table, self).__init__(**kwargs)
 		self.turn=0
@@ -24,32 +22,33 @@ class Table(GridLayout):
 		#This returns the row and column of the button presssed if not already pressed
 		def callback(button):
 			#print(instance,button)
-			for i in range(9):
-				if button == self.buttons['button%s' %i]["obj"]:
-					row=i//self.cols
-					col=i%self.cols
-					#print("row",row,"col",col)
-					#we change colors and return row,col if the button isn't already pressed
-					if not(self.buttons['button%s' %i]["state"]):
-						if not(self.turn%2):
-							button.background_color=(128,0,0,1)
-						else:
-							button.background_color=(0,0,128,1)
-						print('The button %s (%s,%s) is being pressed' %(button.text,row,col))
-						self.turn+=1
-						self.buttons['button%s' %i]["state"]=True
-						return row,col
-					else :
-						print('The button %s (%s,%s) is already pressed' %(button.text,row,col))
+			i = self.buttons[button]["id"]
+			row=i//self.cols
+			col=i%self.cols
+			#we change colors and return row,col if the button isn't already pressed
+			if not(self.buttons[button]["state"]):
+				if not(self.turn%2):
+					button.background_color=(128,0,0,1)
+				else:
+					button.background_color=(0,0,128,1)
+				self.turn+=1
+				self.buttons[button]["state"]=True
+				print('Turn: %s' %self.turn)
+				print('The button %s (%s,%s) is being pressed' %(self.buttons[button]["id"],row,col))
+				return row,col
+			else :
+				print('Turn: %s' %self.turn)
+				print('The button %s (%s,%s) is already pressed' %(self.buttons[button]["id"],row,col))
 
-		#button dictionnary with name and state {"button":{"obj":button,"state":boolean}
+		#button dictionnary with name and state {"button":{"id":int,"state":boolean}
 		self.buttons={}
 		for i in range(9):   
-			self.add_widget(Button(text=str(i),background_color=(1,1,1,1)))
-			self.buttons["button%s" %i]={}
-			self.buttons["button%s" %i]["obj"]=self.children[0]
-			self.buttons["button%s" %i]["obj"].bind(on_press=callback)
-			self.buttons["button%s" %i]["state"]=False
+			#self.add_widget(Button(text=str(i),background_color=(1,1,1,1)))
+			self.add_widget(Button(background_color=(1,1,1,1)))
+			self.children[0].bind(on_press=callback)
+			self.buttons[self.children[0]]={}
+			self.buttons[self.children[0]]["id"]=i
+			self.buttons[self.children[0]]["state"]=False
 			print("dict",self.buttons)
 			#print("children",self.children)
 
