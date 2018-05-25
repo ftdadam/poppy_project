@@ -51,7 +51,7 @@ while True:
         #Blink the LED
         digitalWrite(led,1)		# Send HIGH to switch on LED
         print ("LED ON!")
-        time.sleep(1)
+        time.sleep(4)
 
         digitalWrite(led,0)		# Send LOW to switch off LED
         print ("LED OFF!")
