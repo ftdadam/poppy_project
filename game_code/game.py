@@ -12,7 +12,7 @@ from kivy.graphics import Color,Ellipse
 from kivy.graphics.transformation import Matrix
 
 
-#Configuration de l'input TUIO
+### Configuration of the TUIO input 
 Config.set('input','Reactable','tuio,127.0.0.1:3333')
 
 
@@ -23,7 +23,6 @@ class Table(FloatLayout):
 		super(Table, self).__init__(**kwargs)
 		
 		### Where to launch the app on the screen
-
 		width=1280
 		height=800
 		Window.top = 0
@@ -37,17 +36,18 @@ class Table(FloatLayout):
 		self.turn = 0
 		self.cols = 3
 
+		### This function will be called everytime something is tracked on the Reactable
+		###	Here we define what to do if it's a fludical
 		def on_motion(self, etype, motionevent):
 			
 			### We care only about flucidal
 			#print(motionevent.pos)
 			if 'markerid' in motionevent.profile:
 				### We apply the transformation
-		
-				dx=0
+				a=0.875
 				dy=15
 
-				mx,my=0.875*motionevent.pos[0],motionevent.pos[1]+dy
+				mx,my=a*motionevent.pos[0],motionevent.pos[1]+dy
 
 				### Here we draw a green point where the flucidal is
 				with self.canvas:
@@ -58,13 +58,12 @@ class Table(FloatLayout):
 				
 
 				### We find the button pressed and make the play
-
 				### Check if it's the relaunch button
 				if mx>=514 and mx<=576 and my>=602 and my<=678:
 					relaunch()
 					pass
 
-				### Check the play
+				### Check a play button
 				#print(mx,my)
 				for x in range(3):
 					if mx>=(316+x*160) and mx<=(454+x*160):
@@ -76,21 +75,21 @@ class Table(FloatLayout):
 								for button in self.children[0].buttons:
 									if self.children[0].buttons[button]["id"] == id_button :
 										b = button
-
+								### We make the play
 								play(b)
 		pass
 
 		Window.bind(on_motion=on_motion)
 
 		### This returns the row and column of the button presssed if not already pressed
-		
 		def play(button):
 
+			### We get the id, row and column of the button pressed
 			i = self.buttons[button]["id"]
 			col=(i)//self.cols
 			row=(i)%self.cols 
 
-			### we change colors and return row,col if the button isn't already pressed
+			### We change color and return row,col if the button isn't already pressed
 			if not(self.buttons[button]["state"]):
 				if not(self.turn%2):
 					button.background_color=(128,0,0,1)
@@ -107,8 +106,8 @@ class Table(FloatLayout):
 				#print('The button %s (%s,%s) is already pressed' %(self.buttons[button]["id"],row,col))
 				pass
 		
-		### This is to relaunch the game (make sure there is no more button on play)
 
+		### This is to relaunch the game (make sure there is no more button on play)
 		def relaunch():
 
 			self.turn=0
@@ -119,8 +118,7 @@ class Table(FloatLayout):
 
 
 		### We add the buttons on the board
-		### button dictionnary with name and state {"button":{"id":int,"state":boolean}
-		
+		### button dictionnary with name and state {button:{"id":int,"state":boolean}}
 		self.buttons={}
 
 		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.425,"center_y":0.8},size_hint=(0.05,0.1)))
@@ -133,16 +131,14 @@ class Table(FloatLayout):
 			col=(i)//self.cols
 			row=(i)%self.cols  
 			x,y= (0.3+float(row)/8),(0.60-float(col)/7)
-			self.add_widget(Button(id=str(i),background_color=(1,1,1,1),pos_hint={"center_x":x,"center_y":y},size_hint=(0.11,0.13)))
+			
+			self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":x,"center_y":y},size_hint=(0.11,0.13)))
 			self.do_layout()
+			
 			#self.children[0].bind(on_press=play)
 			self.buttons[self.children[0]] = {}	
 			self.buttons[self.children[0]]["id"] = i
 			self.buttons[self.children[0]]["state"] = False
-
-
-		for button in self.buttons:
-			print(button.pos,button.pos_hint)
 
 
 class MyApp(App):
