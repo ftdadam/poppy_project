@@ -1,0 +1,18 @@
+my_string = "[<DxlMotor name=abs_z id=33 pos=8.57>, <DxlMotor name=abs_x id=32 pos=0.74>, <DxlMotor name=abs_y id=31 pos=50.15>, <DxlMotor name=bust_y id=34 pos=-14.81>, <DxlMotor name=bust_x id=35 pos=19.82>, <DxlMotor name=head_z id=36 pos=-80.79>, <DxlMotor name=head_y id=37 pos=8.01>, <DxlMotor name=l_shoulder_y id=41 pos=-92.33>, <DxlMotor name=l_shoulder_x id=42 pos=98.84>, <DxlMotor name=l_arm_z id=43 pos=-105.19>, <DxlMotor name=l_elbow_y id=44 pos=67.36>, <DxlMotor name=r_shoulder_y id=51 pos=-95.32>, <DxlMotor name=r_shoulder_x id=52 pos=12.81>, <DxlMotor name=r_arm_z id=53 pos=77.23>, <DxlMotor name=r_elbow_y id=54 pos=-3.58>]"
+my_string = my_string.replace("<DxlMotor name=abs_z id=33 pos=",'')
+my_string = my_string.replace("<DxlMotor name=abs_x id=32 pos=",'')
+my_string = my_string.replace("<DxlMotor name=abs_y id=31 pos=",'')
+my_string = my_string.replace("<DxlMotor name=bust_y id=34 pos=",'')
+my_string = my_string.replace("<DxlMotor name=bust_x id=35 pos=",'')
+my_string = my_string.replace("<DxlMotor name=head_z id=36 pos=",'')
+my_string = my_string.replace("<DxlMotor name=head_y id=37 pos=",'')
+my_string = my_string.replace("<DxlMotor name=l_shoulder_y id=41 pos=",'')
+my_string = my_string.replace("<DxlMotor name=l_shoulder_x id=42 pos=",'')
+my_string = my_string.replace("<DxlMotor name=l_arm_z id=43 pos=",'')
+my_string = my_string.replace("<DxlMotor name=l_elbow_y id=44 pos=",'')
+my_string = my_string.replace("<DxlMotor name=r_shoulder_y id=51 pos=",'')
+my_string = my_string.replace("<DxlMotor name=r_shoulder_x id=52 pos=",'')
+my_string = my_string.replace("<DxlMotor name=r_arm_z id=53 pos=",'')
+my_string = my_string.replace("<DxlMotor name=r_elbow_y id=54 pos=",'')
+my_string = my_string.replace(">",'')
+print my_string

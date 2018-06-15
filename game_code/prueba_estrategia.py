@@ -68,7 +68,8 @@ def reset(player_1,player_2,empty):
 	print_board(board)
 	return robot, board, n_play, current_winner, current_player
 
-# FUNCTIONS THAT CHECK IF THERE ARE WINNING CONDITIONS
+# Check winning conditions
+
 def check_hor(board,empty,player_1,player_2):
 	flag = False
 	aux_X, aux_O = 3, 3
@@ -76,6 +77,7 @@ def check_hor(board,empty,player_1,player_2):
 	for i in range(3):
 		if(board[i][0] == empty or board[i][1] == empty or board[i][2] == empty):
 			empty_rows.append(i)
+	print "empty rows: ", empty_rows
 	for i in empty_rows:
 		quant_X, quant_O = 0, 0
 		for j in range(0,3):
@@ -83,13 +85,13 @@ def check_hor(board,empty,player_1,player_2):
 				quant_X += 1
 			elif board[i][j] == player_2:
 				quant_O += 1
-			if quant_X == 2:
-				aux_X = i
-				flag = True 
-			if quant_O == 2:
-				aux_O = i
-				flag = True
-	return (flag, aux_X, aux_O)
+		if quant_X == 2:
+			aux_X = i
+			flag = True 
+		if quant_O == 2:
+			aux_O = i
+			flag = True
+	return flag, aux_X, aux_O
 
 def check_ver(board,empty,player_1,player_2):
 	flag = False
@@ -98,12 +100,24 @@ def check_ver(board,empty,player_1,player_2):
 	for i in range(3):
 		if(board[0][i] == empty or board[1][i] == empty or board[2][i] == empty):
 			empty_cols.append(i)
+	print "empty cols: ", empty_cols
 	for j in empty_cols:
 		quant_X, quant_O = 0, 0
 		for i in range(0,3):
 			if board[i][j] == player_1:
 				quant_X += 1
 			elif board[i][j] == player_2:
+				quant_O += 1
+			if quant_X == 2:
+				aux_X = j
+				flag = True 
+			if quant_O == 2:
+				aux_O = j
+				flag = True
+
+	print "aux_X = ", aux_X
+	print "aux_O = ", aux_O
+	return (flag, aux_X, aux_O)
 
 def check_main_diag(board,empty,player_1,player_2):
 	flag = False
@@ -120,8 +134,8 @@ def check_main_diag(board,empty,player_1,player_2):
 
 def check_sec_diag(board,empty,player_1,player_2):
 	flag = False
-	quant_X, quant_O = 0, 0
 	if (board[0][2] == empty or board[1][1] == empty or board[2][0] == empty):
+		quant_X, quant_O = 0, 0
 		for i in range(3):
 			if board[i][2-i] == player_1:
 				quant_X += 1
@@ -129,7 +143,7 @@ def check_sec_diag(board,empty,player_1,player_2):
 				quant_O += 1
 		if quant_X == 2 or quant_O == 2:
 			flag = True	
-	return [flag, aux_X, aux_O]
+	return flag
 
 
 # FUNCTIONS THAT FIND THE EMPTY BOX
@@ -143,142 +157,79 @@ def find_hole_in_col(board,j):
 			return i
 
 
-# FUNCTIONS THAT DEFINES THE MOVEMENT TO COMPLETE A row
-def move_hor(board,robot,empty,player_1,player_2,flag,aux_X, aux_O):
-	if flag == True:
-		if robot == player_1:
-			if aux_X < 3:
-				row = aux_X
-				col = find_hole_in_row(board, row)
-				return row, col
-			elif aux_O < 3:
-				row = aux_O
-				col = find_hole_in_row(board,row)
-				return row, col			
+# FUNCTIONS THAT DEFINES THE MOVEMENT TO COMPLETE A LINE
+def move_hor(board,robot,empty,player_1,player_2,aux_X, aux_O):
+	if robot == player_1:
+		if aux_X < 3:
+			row = aux_X
+			col = find_hole_in_row(board, row,empty)
+		elif aux_O < 3:
+			row = aux_O
+			col = find_hole_in_row(board,row,empty)
+	else:
+		if aux_O < 3:
+			row = aux_O
+			col = find_hole_in_row(board,row,empty)
+		elif aux_X < 3:
+			row = aux_X
+			col = find_hole_in_row(board,row,empty)
+	return row, col	
 
-		elif robot == player_2:
-			if aux_O < 3:
-				row = aux_O
-				col = find_hole_in_row(board,row)
-				return row, col
-		
-			elif aux_X < 3:
-				row = aux_X
-				col = find_hole_in_row(board,row)
-				return row, col
-
-def move_ver(board,robot,empty,player_1,player_2,flag,aux_X, aux_O):
-	if flag == True:
-		if robot == player_1:
-			if aux_X < 3:
-				col = aux_X
-				row = find_hole_in_col(board,col)
-				return row, col
-			elif aux_O < 3:
-				col = aux_O
-				row = find_hole_in_col(board,col)
-				return row, col
-
-		elif robot == player_2:
-			if aux_O < 3:
-				col = aux_O
-				row = find_hole_in_col(board,col)
-				return row, col
-			if aux_X < 3:
-				col = aux_X
-				row = find_hole_in_col(board,col)
-				return row, col
+def move_ver(board,robot,empty,player_1,player_2,aux_X, aux_O):
+	if robot == player_1:
+		if aux_X < 3:
+			col = aux_X
+			row = find_hole_in_col(board,col,empty)
+		elif aux_O < 3:
+			col = aux_O
+			row = find_hole_in_col(board,col,empty)
+	else:
+		if aux_O < 3:
+			col = aux_O
+			row = find_hole_in_col(board,col,empty)
+		elif aux_X < 3:
+			col = aux_X
+			row = find_hole_in_col(board,col,empty)
+	return row, col
 
 def move_md(board,empty):
-=======
-def find_hole_in_line(board,i):
-	for j in range(3):
-		if board[i][j] == empty:
-			return j
-def find_hole_in_col(board,j):
-	for i in range(3):
-		if board[i][j] == empty:
-			return i
-
-
-# FUNCTIONS THAT DEFINES THE MOVEMENT TO COMPLETE A LINE
-def move_hor(board):
-	test = check_hor(board)
-	if test[0] == True:
-		if poppy == player_1:
-			if test[1] < 3:
-				row = test[1]
-				col = find_hole_in_line(board, row)
-				return row, col
-			elif test[2] < 3:
-				row = test[2]
-				col = find_hole_in_line(board,row)
-				return row, col			
-
-		elif poppy == player_2:
-			if test[2] < 3:
-				row = test[2]
-				col = find_hole_in_line(board,row)
-				return row, col
-		
-			elif test[1] < 3:
-				row = test[1]
-				col = find_hole_in_line(board,row)
-				return row, col
-
-def move_ver(board):
-	test = check_ver(board)
-	if test[0] == True:
-		if poppy == 1:
-			if test[1] < 3:
-				col = test[1]
-				row = find_hole_in_col(board,col)
-				return row, col
-			elif test[2] < 3:
-				col = test[2]
-				row = find_hole_in_col(board,col)
-				return row, col
-
-		elif poppy == 2:
-			if test[2] < 3:
-				col = test[2]
-				row = find_hole_in_col(board,col)
-				return row, col
-			if test[1] < 3:
-				col = test[1]
-				row = find_hole_in_col(board,col)
-				return row, col
-
-def move_md(board):
->>>>>>> 664440d591ef6f00dffa1b63c554885279d179f9
 	for i in range(3):
 		if board[i][i] == empty:
 			row, col = i, i
 			return row, col	
 
-<<<<<<< HEAD
 def move_sd(board,empty):
-=======
-def mode_sd(board):
->>>>>>> 664440d591ef6f00dffa1b63c554885279d179f9
 	for i in range(3):
 		if board[i][2-i] == empty:
 			row, col = i, 2-i
 			return row, col	
 
+# To find the holes in a line
+
+def find_hole_in_row(board,i,empty):
+	for j in range(3):
+		if board[i][j] == empty:
+			return j
+
+def find_hole_in_col(board,j,empty):
+	for i in range(3):
+		if board[i][j] == empty:
+			return i
+
 
 # FUNCTION THAT MAKES THE MOVEMENT
-<<<<<<< HEAD
+
 def make_move(board,robot,empty,player_1,player_2):
 	flag_h, aux_X_h, aux_O_h = check_hor(board,empty,player_1,player_2)
 	flag_v, aux_X_v, aux_O_v = check_ver(board,empty,player_1,player_2)
 	test_md = check_main_diag(board,empty,player_1,player_2)
 	test_sd = check_sec_diag(board,empty,player_1,player_2)
+	print "flags",flag_h, flag_v
 	if flag_h:
-		row, col = move_hor(board,robot,empty,player_1,player_2,flag_h,aux_X_h, aux_O_h)
+		row, col = move_hor(board,robot,empty,player_1,player_2,aux_X_h, aux_O_h)
 		print 'move_hor'
 	elif flag_v:
-		row, col = move_ver(board,robot,empty,player_1,player_2,flag_v,aux_X_v, aux_O_v)
+		row, col = move_ver(board,robot,empty,player_1,player_2,aux_X_v, aux_O_v)
 		print 'move_ver'
 	elif test_md:
 		row, col = move_md(board,empty)
@@ -291,22 +242,4 @@ def make_move(board,robot,empty,player_1,player_2):
 		row = randint(0,2)
 		col = randint(0,2)
 	print row, col
-=======
-def make_move(board):
-	test_h = check_hor(board)
-	test_v = check_ver(board)
-	test_md = check_main_diag(board)
-	test_sd = check_sec_diag(board)
-	if test_h[0]:
-		row, col = move_h(board)
-	elif test_v[0]:
-		row, col = move_v
-	elif test_md[0]:
-		row, col = move_md(board)
-	elif test_sd[0]:
-		row, col = move_sd(board)
-	else:
-		row = randint(0,2)
-		col = randint(0,2)
->>>>>>> 664440d591ef6f00dffa1b63c554885279d179f9
 	return row, col

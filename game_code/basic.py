@@ -45,6 +45,7 @@ while(1):
 			(board, n_play, current_winner, current_player) = play(row,col,board,current_player,current_winner, n_play,player_1,player_2,empty)
 			print ("Poppy's moving his hand...")
 			time.sleep(0.5)
+			print board
 		else:
 			print("Your Turn...")
 			isValid = False
