@@ -99,7 +99,7 @@ class Table(FloatLayout):
 				self.buttons[button]["state"]=True
 				print('Turn: %s' %self.turn)
 				print('The button %s (%s,%s) is being pressed' %(self.buttons[button]["id"],row,col))
-				return col,row
+				return row,col
 
 			else :
 				#print('Turn: %s' %self.turn)
