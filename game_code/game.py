@@ -101,12 +101,26 @@ class Table(FloatLayout):
 				print('Turn: %s' %self.turn)
 				print('The button %s (%s,%s) is being pressed' %(self.buttons[button]["id"],row,col))
 				return col,row
+				# f = open('data', 'w')
+				# f.write(turn)
+				# f.write(row)
+				# f.write(col)
+				# f.close()
+				# self.scp('data','data')
 
 			else :
 				#print('Turn: %s' %self.turn)
 				#print('The button %s (%s,%s) is already pressed' %(self.buttons[button]["id"],row,col))
 				pass
-		
+
+		# def createSSHClient(server, port, user, password):
+		#     client = paramiko.SSHClient()
+		#     client.load_system_host_keys()
+		#     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		#     #client.connect(server, port, user, password)
+		#     client.connect(server, port, poppy, poppy)
+		#     return client
+
 		### This is to relaunch the game (make sure there is no more button on play)
 
 		def relaunch():
@@ -121,6 +135,9 @@ class Table(FloatLayout):
 		### We add the buttons on the board
 		### button dictionnary with name and state {"button":{"id":int,"state":boolean}
 		
+		# self.ssh = createSSHClient(server, port, user, password)
+		# self.scp = SCPClient(ssh.get_transport())
+
 		self.buttons={}
 
 		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.425,"center_y":0.8},size_hint=(0.05,0.1)))
