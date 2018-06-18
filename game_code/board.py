@@ -11,6 +11,8 @@ from kivy.config import Config
 from kivy.graphics import Color,Ellipse
 from kivy.graphics.transformation import Matrix
 
+import os
+import paramiko
 
 ### Configuration of the TUIO input 
 Config.set('input','Reactable','tuio,127.0.0.1:3333')
@@ -100,25 +102,24 @@ class Table(FloatLayout):
 				print('Turn: %s' %self.turn)
 				print('The button %s (%s,%s) is being pressed' %(self.buttons[button]["id"],row,col))
 				return row,col
-				# f = open('data', 'w')
-				# f.write(turn)
-				# f.write(row)
-				# f.write(col)
-				# f.close()
-				# self.scp('data','data')
+				f = open('data', 'w')
+				f.write(turn)
+				f.write(row)
+				f.write(col)
+				f.close()
+				ssh = paramiko.SSHClient()
+				ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
+				ssh.connect("10.77.3.120", username="poppy", password="poppy")
+				sftp = ssh.open_sftp()
+				sftp.put("data", "/home/pi/poppy_project/game_code/data")
+				sftp.close()
+				ssh.close()
+
 
 			else :
 				#print('Turn: %s' %self.turn)
 				#print('The button %s (%s,%s) is already pressed' %(self.buttons[button]["id"],row,col))
 				pass
-
-		# def createSSHClient(server, port, user, password):
-		#     client = paramiko.SSHClient()
-		#     client.load_system_host_keys()
-		#     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		#     #client.connect(server, port, user, password)
-		#     client.connect(server, port, poppy, poppy)
-		#     return client
 
 		### This is to relaunch the game (make sure there is no more button on play)
 		def relaunch():
@@ -132,8 +133,6 @@ class Table(FloatLayout):
 
 		### We add the buttons on the board
 		### button dictionnary with name and state {button:{"id":int,"state":boolean}}		
-		# self.ssh = createSSHClient(server, port, user, password)
-		# self.scp = SCPClient(ssh.get_transport())
 
 		self.buttons={}
 
@@ -161,8 +160,6 @@ class MyApp(App):
 
     def build(self):
         return Table()
-
-
 
 if __name__ == '__main__':
     MyApp().run()

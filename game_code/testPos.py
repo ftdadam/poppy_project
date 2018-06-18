@@ -77,10 +77,7 @@ class Table(FloatLayout):
 
 	def __init__(self, **kwargs):
 
-		self.matrix = Matrix()
-		self.matrix.translate(x=-0.1)
-		print(self.matrix)
-		 
+
 		def on_motion(self, etype, motionevent):
 			print (motionevent.pos)
 			motionevent.pos=(300,300)
