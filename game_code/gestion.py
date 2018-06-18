@@ -32,6 +32,10 @@ from strategy import *
 
 polling = True
 first_move = True
+robot_move = False
+human_move = False
+reset_move = False
+
 
 while(1):
 	while(polling):
@@ -41,49 +45,47 @@ while(1):
 			file_data.append(int(line))
 		n_play_file, row, col = file_data[0], file_data[1], file_data[2]
 		time.sleep(0.5)
-		if(n_play_file == -1 and n_play != 0):
-			print "resetando"
+		if(n_play_file == -2):
+			print "putin"
+		if((n_play_file == -1 and n_play != 0 and robot != player_1) or (current_winner != empty and n_play_file == -1)):
+			print 'aca1'
 			n_play = n_play_file
 			file.close()
+			reset_move = True
 			polling = False
-		elif(robot == player_2 and n_play_file%2 != 0):
+		elif((robot == player_2 and n_play_file%2 != 0) or (robot == player_1 and n_play_file%2 == 0)):
 			if (n_play_file > n_play):
-				print "jugando"
+				print 'aca2'
 				n_play = n_play_file
 				file.close()
-				polling = False
-		elif((robot == player_1 and n_play_file%2 == 0)):
-			if (n_play_file > n_play):
-				print "jugando"
-				n_play = n_play_file
-				file.close()
+				human_move = True
 				polling = False
 		elif(robot == player_1 and n_play == 0 and first_move):
+			print 'aca3'
+			robot_move = True
 			polling = False
-	if(n_play > 0):
-		print("Your Turn...")
+	if(human_move):
 		(board, current_winner, current_player) = play(row,col,board,current_player,current_winner, n_play,player_1,player_2,empty)
 		print_board(board)
-		time.sleep(0.5)
-		print("Poppy's Turn...")
+		human_move = False
+		if(current_winner == empty):
+			robot_move = True
+		else:
+			polling = True
+	if(robot_move):
 		isValid = False
-		while(not(isValid) and current_winner == empty):
-			(row, col) = make_move(board,robot,empty,player_1,player_2)
-			isValid = validate_move(row,col,board,empty)
-		(board, current_winner, current_player) = play(row,col,board,current_player,current_winner,n_play,player_1,player_2,empty)
-		print_board(board)
-		polling = True
-	elif(n_play == 0):
-		print("Poppy's Turn...")
-		isValid = False
+		n_play = n_play + 1
 		while(not(isValid)):
 			(row, col) = make_move(board,robot,empty,player_1,player_2)
 			isValid = validate_move(row,col,board,empty)
 		(board, current_winner, current_player) = play(row,col,board,current_player,current_winner,n_play,player_1,player_2,empty)
 		print_board(board)
-		first_move = False
+		robot_move = False
+		if(robot == player_1 and first_move):
+			first_move = False
 		polling = True
-	elif(n_play == -1):
-		(robot, board, n_play, current_winner, current_player) = reset(player_1,player_2,empty)
+	if(reset_move):
+		(robot, board, n_play, current_winner, current_player,first_move) = reset(player_1,player_2,empty)
+		reset_move = False
 		polling = True
 		
