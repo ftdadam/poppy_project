@@ -88,8 +88,8 @@ class Table(FloatLayout):
 
 			### We get the id, row and column of the button pressed
 			i = self.buttons[button]["id"]
-			col=(i)//self.cols
-			row=(i)%self.cols 
+			row=(i)//self.cols
+			col=(i)%self.cols 
 
 			### We change color and return row,col if the button isn't already pressed
 			if not(self.buttons[button]["state"]):
@@ -130,9 +130,9 @@ class Table(FloatLayout):
 		# Here we add the 9 button of the board
 		buttonsNumber = 9
 		for i in range(buttonsNumber):
-			col=(i)//self.cols
-			row=(i)%self.cols  
-			x,y= (0.3+float(row)/8),(0.60-float(col)/7)
+			row=(i)//self.cols
+			col=(i)%self.cols  
+			x,y= (0.3+float(col)/8),(0.60-float(row)/7)
 			
 			self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":x,"center_y":y},size_hint=(0.11,0.13)))
 			self.do_layout()
