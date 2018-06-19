@@ -45,7 +45,7 @@ class Table(FloatLayout):
 			
 			### We care only about flucidal
 			#print(motionevent.pos)
-			if 'markerid' in motionevent.profile:
+			if 'markerid' in motionevent.profile :
 				### We apply the transformation
 				a=0.875
 				dy=15
@@ -63,8 +63,12 @@ class Table(FloatLayout):
 
 				### We find the button pressed and make the play
 				### Check if it's the relaunch button
-				if mx>=514 and mx<=576 and my>=602 and my<=678:
-					relaunch()
+				if mx>=470 and mx<=554 and my>=602 and my<=678:
+					relaunch1()
+					pass
+
+				if mx>=559 and mx<=645 and my>=602 and my<=678:
+					relaunch2()
 					pass
 
 				### Check a play button
@@ -168,15 +172,17 @@ class Table(FloatLayout):
 
 		self.buttons={}
 		# Here We add the two relaunch buttons
-		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.400,"center_y":0.8},size_hint=(0.05,0.1)))
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.400,"center_y":0.8},size_hint=(0.07,0.1)))
 		self.buttons[self.children[0]]={}
 		self.buttons[self.children[0]]["id"] = -1
 		self.buttons[self.children[0]]["state"] = False
+		self.add_widget(Image(source="board_text/j1.png",pos_hint={"center_x":0.400,"center_y":0.8},size_hint=(0.05,0.1)))
 
-		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.450,"center_y":0.8},size_hint=(0.05,0.1)))
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.470,"center_y":0.8},size_hint=(0.07,0.1)))
 		self.buttons[self.children[0]]={}
 		self.buttons[self.children[0]]["id"] = -1
 		self.buttons[self.children[0]]["state"] = False
+		self.add_widget(Image(source="board_text/j2.png",pos_hint={"center_x":0.470,"center_y":0.8},size_hint=(0.05,0.1)))
 
 		# Here we add the 9 button of the board
 		buttonsNumber = 9
