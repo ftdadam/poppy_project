@@ -50,23 +50,23 @@ def check_win(board,current_player):
 		isWin = True
 	return isWin
 
-def set_poppy_player(player_1, player_2):
-	value = int(raw_input("Player Number for Poppy (1 or 2): << "))
-	while(value != 1 and value != 2):
-		value = int(raw_input("Incorrect number, try again (1 or 2): << "))
-	if(value == 1):
-		return player_1
-	else:
-		return player_2
-
-def reset(player_1,player_2,empty):
+# def set_poppy_player(player_1, player_2):
+# 	value = int(raw_input("Player Number for Poppy (1 or 2): << "))
+# 	while(value != 1 and value != 2):
+# 		value = int(raw_input("Incorrect number, try again (1 or 2): << "))
+# 	if(value == 1):
+# 		return player_1
+# 	else:
+# 		return player_2
+	
+def reset(player_1,player_2,empty,poppy_player_number):
 	current_player = player_1
 	current_winner = empty
-	robot = set_poppy_player(player_1, player_2)
-	# robot = player_2
-	if(robot == player_1):
+	if(poppy_player_number == 1):
+		robot = player_1
 		first_move = True
 	else:
+		robot =  player_2
 		first_move = False
 	board = [[empty for x in range(w)] for y in range(h)]
 	n_play = 0

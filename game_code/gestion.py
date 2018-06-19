@@ -47,6 +47,7 @@ while(1):
 			n_play = n_play_file
 			file.close()
 			reset_move = True
+			poppy_player_number = file_data[1]
 			polling = False
 		elif((robot == player_2 and n_play_file%2 != 0) or (robot == player_1 and n_play_file%2 == 0)):
 			if (n_play_file > n_play):
@@ -82,7 +83,7 @@ while(1):
 			first_move = False
 		polling = True
 	if(reset_move):
-		(robot, board, n_play, current_winner, current_player,first_move) = reset(player_1,player_2,empty)
+		(robot, board, n_play, current_winner, current_player,first_move) = reset(player_1,player_2,empty,poppy_player_number)
 		initial_pos(poppy)
 		reset_move = False
 		polling = True
