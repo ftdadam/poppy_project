@@ -101,18 +101,6 @@ class Table(FloatLayout):
 				self.buttons[button]["state"]=True
 				print('Turn: %s' %self.turn)
 				print('The button %s (%s,%s) is being pressed' %(self.buttons[button]["id"],row,col))
-				f = open('data', 'w')
-				f.write(str(self.turn)+'\n')
-				f.write(str(row)+'\n')
-				f.write(str(col)+'\n')
-				f.close()
-				ssh = paramiko.SSHClient()
-				ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
-				ssh.connect("10.77.3.120", username="poppy", password="poppy")
-				sftp = ssh.open_sftp()
-				sftp.put("data", "/home/pi/poppy_project/game_code/data")
-				sftp.close()
-				ssh.close()
 
 
 			else :
@@ -126,18 +114,6 @@ class Table(FloatLayout):
 			for but in self.buttons:
 				self.buttons[but]["state"]=False
 				but.background_color=(1,1,1,1)
-			f = open('data', 'w')
-			f.write(str(-1)+'\n')
-			f.write(str(0)+'\n')
-			f.write(str(01)+'\n')
-			f.close()
-			ssh = paramiko.SSHClient()
-			ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
-			ssh.connect("10.77.3.120", username="poppy", password="poppy")
-			sftp = ssh.open_sftp()
-			sftp.put("data", "/home/pi/poppy_project/game_code/data")
-			sftp.close()
-			ssh.close()
 			pass
 
 
