@@ -64,11 +64,11 @@ class Table(FloatLayout):
 				### We find the button pressed and make the play
 				### Check if it's the relaunch button
 				if mx>=470 and mx<=554 and my>=602 and my<=678:
-					relaunch1()
+					relaunch_player_2()
 					pass
 
 				if mx>=559 and mx<=645 and my>=602 and my<=678:
-					relaunch2()
+					relaunch_player_1()
 					pass
 
 				### Check a play button
@@ -128,6 +128,7 @@ class Table(FloatLayout):
 
 		### This is to relaunch the game (make sure there is no more button on play)
 		def relaunch_player_1():
+			print("1")
 			self.turn=0
 			for but in self.buttons:
 				self.buttons[but]["state"]=False
@@ -146,7 +147,8 @@ class Table(FloatLayout):
 			ssh.close()
 			pass
 
-		def relaunch_player_1():
+		def relaunch_player_2():
+			print("2")
 			self.turn=0
 			for but in self.buttons:
 				self.buttons[but]["state"]=False
