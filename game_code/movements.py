@@ -1,5 +1,10 @@
 import time
+from grovepi import *
 
+# === set grovepi+ port 4 as output ===
+
+em = 4
+pinMode(em,"OUTPUT")
 def em_control(state):
 	em = 4
 	try:

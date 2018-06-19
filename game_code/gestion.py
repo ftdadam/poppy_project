@@ -5,9 +5,6 @@ from grovepi import *
 from strategy import *
 from movements import *
 
-# === set grovepi+ port 4 as output ===
-em = 4
-pinMode(em,"OUTPUT")
 
 # === create a robot object from json config file === 
 poppy=from_json("/home/poppy/miniconda/lib/python2.7/site-packages/poppy_torso/configuration/poppy_torso_new.json")
