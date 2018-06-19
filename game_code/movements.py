@@ -38,6 +38,7 @@ def initial_pos(poppy):
 	motor_angles = [0,0,45,0,5,-5,0,-10,15,20,-10,-180,0,-20,0]
 	mov_time = 1.5
 	move_robot(poppy,motor_angles,mov_time)
+	em_control(0)
 	
 def take_piece_1(poppy):
 	# prepare to take a piece
@@ -131,6 +132,7 @@ def move_to_board(poppy,row,col):
 
 	move_robot(poppy,motor_angles,mov_time)
 	em_control(0)
+	initial_pos(poppy)
 
 
 def robot_play(n_play,robot,player_1,player_2,row,col,poppy):
