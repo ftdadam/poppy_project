@@ -64,11 +64,15 @@ def reset(player_1,player_2,empty):
 	current_winner = empty
 	robot = set_poppy_player(player_1, player_2)
 	# robot = player_2
+	if(robot == player_1):
+		first_move = True
+	else:
+		first_move = False
 	board = [[empty for x in range(w)] for y in range(h)]
 	n_play = 0
 	print "Start!"
 	print_board(board)
-	return robot, board, n_play, current_winner, current_player
+	return robot, board, n_play, current_winner, current_player,first_move
 
 # Check winning conditions
 
@@ -79,7 +83,6 @@ def check_hor(board,empty,player_1,player_2):
 	for i in range(3):
 		if(board[i][0] == empty or board[i][1] == empty or board[i][2] == empty):
 			empty_rows.append(i)
-	print "empty rows: ", empty_rows
 	for i in empty_rows:
 		quant_X, quant_O = 0, 0
 		for j in range(0,3):
@@ -102,7 +105,6 @@ def check_ver(board,empty,player_1,player_2):
 	for i in range(3):
 		if(board[0][i] == empty or board[1][i] == empty or board[2][i] == empty):
 			empty_cols.append(i)
-	print "empty cols: ", empty_cols
 	for j in empty_cols:
 		quant_X, quant_O = 0, 0
 		for i in range(0,3):
@@ -116,9 +118,6 @@ def check_ver(board,empty,player_1,player_2):
 			if quant_O == 2:
 				aux_O = j
 				flag = True
-
-	print "aux_X = ", aux_X
-	print "aux_O = ", aux_O
 	return (flag, aux_X, aux_O)
 
 def check_main_diag(board,empty,player_1,player_2):
@@ -226,22 +225,19 @@ def make_move(board,robot,empty,player_1,player_2):
 	flag_v, aux_X_v, aux_O_v = check_ver(board,empty,player_1,player_2)
 	test_md = check_main_diag(board,empty,player_1,player_2)
 	test_sd = check_sec_diag(board,empty,player_1,player_2)
-	print "flags",flag_h, flag_v
 	if flag_h:
 		row, col = move_hor(board,robot,empty,player_1,player_2,aux_X_h, aux_O_h)
-		print 'move_hor'
 	elif flag_v:
 		row, col = move_ver(board,robot,empty,player_1,player_2,aux_X_v, aux_O_v)
-		print 'move_ver'
 	elif test_md:
 		row, col = move_md(board,empty)
-		print 'move_md'
 	elif test_sd:
 		row, col = move_sd(board,empty)
-		print 'move_sd'
 	else:
-		print 'random'
 		row = randint(0,2)
 		col = randint(0,2)
-	print row, col
 	return row, col
+# def make_move(board,robot,empty,player_1,player_2):
+# 	row = randint(0,2)
+# 	col = randint(0,2)
+# 	return row, col
