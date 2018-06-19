@@ -122,7 +122,12 @@ class Table(FloatLayout):
 
 		self.buttons={}
 		# Here We add the relaunch button
-		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.425,"center_y":0.8},size_hint=(0.05,0.1)))
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.375,"center_y":0.8},size_hint=(0.05,0.1)))
+		self.buttons[self.children[0]]={}
+		self.buttons[self.children[0]]["id"] = -1
+		self.buttons[self.children[0]]["state"] = False
+
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.450,"center_y":0.8},size_hint=(0.05,0.1)))
 		self.buttons[self.children[0]]={}
 		self.buttons[self.children[0]]["id"] = -1
 		self.buttons[self.children[0]]["state"] = False

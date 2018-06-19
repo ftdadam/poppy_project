@@ -10,6 +10,7 @@ from kivy.uix.button import Button
 from kivy.config import Config
 from kivy.graphics import Color,Ellipse
 from kivy.graphics.transformation import Matrix
+from kivy.uix.image import Image
 
 import os
 import paramiko
@@ -51,11 +52,12 @@ class Table(FloatLayout):
 
 				mx,my=a*motionevent.pos[0],motionevent.pos[1]+dy
 
-				### Here we draw a green point where the flucidal is
-				with self.canvas:
-					Color(0,1,0)
-					d=3.
-					Ellipse(pos=(mx-d /2,my-d/2),size=(d,d))
+
+				# ### Here we draw a green point where the flucidal is
+				# with self.canvas:
+				# 	Color(0,1,0)
+				# 	d=3.
+				# 	Ellipse(pos=(mx-d /2,my-d/2),size=(d,d))
 
 				
 
@@ -121,15 +123,34 @@ class Table(FloatLayout):
 				pass
 
 		### This is to relaunch the game (make sure there is no more button on play)
-		def relaunch():
+		def relaunch_player_1():
 			self.turn=0
 			for but in self.buttons:
 				self.buttons[but]["state"]=False
 				but.background_color=(1,1,1,1)
 			f = open('data', 'w')
 			f.write(str(-1)+'\n')
+			f.write(str(1)+'\n')
 			f.write(str(0)+'\n')
-			f.write(str(01)+'\n')
+			f.close()
+			ssh = paramiko.SSHClient()
+			ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
+			ssh.connect("10.77.3.120", username="poppy", password="poppy")
+			sftp = ssh.open_sftp()
+			sftp.put("data", "/home/pi/poppy_project/game_code/data")
+			sftp.close()
+			ssh.close()
+			pass
+
+		def relaunch_player_1():
+			self.turn=0
+			for but in self.buttons:
+				self.buttons[but]["state"]=False
+				but.background_color=(1,1,1,1)
+			f = open('data', 'w')
+			f.write(str(-1)+'\n')
+			f.write(str(2)+'\n')
+			f.write(str(0)+'\n')
 			f.close()
 			ssh = paramiko.SSHClient()
 			ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
@@ -141,12 +162,18 @@ class Table(FloatLayout):
 			pass
 
 
+
 		### We add the buttons on the board
 		### button dictionnary with name and state {button:{"id":int,"state":boolean}}		
 
 		self.buttons={}
-		# Here We add the relaunch button
-		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.425,"center_y":0.8},size_hint=(0.05,0.1)))
+		# Here We add the two relaunch buttons
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.400,"center_y":0.8},size_hint=(0.05,0.1)))
+		self.buttons[self.children[0]]={}
+		self.buttons[self.children[0]]["id"] = -1
+		self.buttons[self.children[0]]["state"] = False
+
+		self.add_widget(Button(background_color=(1,1,1,1),pos_hint={"center_x":0.450,"center_y":0.8},size_hint=(0.05,0.1)))
 		self.buttons[self.children[0]]={}
 		self.buttons[self.children[0]]["id"] = -1
 		self.buttons[self.children[0]]["state"] = False
