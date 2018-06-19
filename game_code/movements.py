@@ -34,7 +34,7 @@ def move_robot(poppy,motor_angles,mov_time):
 	poppy.motors[14].goto_position(motor_angles[14],mov_time)
 	time.sleep(1.5)
 
-def initial_pos():
+def initial_pos(poppy):
 	motor_angles = [0,0,45,0,5,-5,0,-10,15,20,-10,-180,0,-20,0]
 	mov_time = 1.5
 	move_robot(poppy,motor_angles,mov_time)
@@ -99,7 +99,7 @@ def take_piece_5(poppy):
 	# turn on em
 	em_control(1)
 
-def move_to_board(row,col):
+def move_to_board(poppy,row,col):
 	# move to the center of the board
 	mov_time = 1.5
 	motor_angles = [23.08,-4.1,50.68,-2.86,16.57,-9.53,10.06,-4.95,11.01,-25.63,-76.81,-133.91,-1.34,17.98,45.16]
@@ -145,5 +145,5 @@ def robot_play(n_play,robot,player_1,player_2,row,col,poppy):
 	elif(robot == player_1 and n_play == 9):
 		take_piece_5(poppy)
 
-	move_to_board(row,col)
+	move_to_board(poppy,row,col)
 	initial_pos

@@ -83,6 +83,7 @@ while(1):
 		polling = True
 	if(reset_move):
 		(robot, board, n_play, current_winner, current_player,first_move) = reset(player_1,player_2,empty)
+		initial_pos(poppy)
 		reset_move = False
 		polling = True
 		
