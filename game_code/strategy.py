@@ -74,7 +74,7 @@ def reset(player_1,player_2,empty,poppy_player_number):
 	print_board(board)
 	return robot, board, n_play, current_winner, current_player,first_move
 
-# Check winning conditions
+# FUNCTIONS THAT CHECK WINNING CONDITIONS
 
 def check_hor(board,empty,player_1,player_2):
 	flag = False
@@ -147,18 +147,20 @@ def check_sec_diag(board,empty,player_1,player_2):
 	return flag
 
 
-# FUNCTIONS THAT FIND THE EMPTY BOX
-def find_hole_in_row(board,i):
+# FUNCTIONS THAT FIND EMPTY BOX IN A LINE OR A COLUMN
+
+def find_hole_in_row(board,i,empty):
 	for j in range(3):
-		if board[i][j] == ' ':
+		if board[i][j] == empty:
 			return j
-def find_hole_in_col(board,j):
+
+def find_hole_in_col(board,j,empty):
 	for i in range(3):
-		if board[i][j] == ' ':
+		if board[i][j] == empty:
 			return i
 
 
-# FUNCTIONS THAT DEFINES THE MOVEMENT TO COMPLETE A LINE
+# FUNCTIONS THAT DEFINE THE MOVEMENT TO COMPLETE A LINE
 def move_hor(board,robot,empty,player_1,player_2,aux_X, aux_O):
 	if robot == player_1:
 		if aux_X < 3:
@@ -205,17 +207,7 @@ def move_sd(board,empty):
 			row, col = i, 2-i
 			return row, col	
 
-# To find the holes in a line
 
-def find_hole_in_row(board,i,empty):
-	for j in range(3):
-		if board[i][j] == empty:
-			return j
-
-def find_hole_in_col(board,j,empty):
-	for i in range(3):
-		if board[i][j] == empty:
-			return i
 
 
 # FUNCTION THAT MAKES THE MOVEMENT
