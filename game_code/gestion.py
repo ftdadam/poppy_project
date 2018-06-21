@@ -61,6 +61,7 @@ while(1):
 
 	if(human_move):
 		(board, current_winner, current_player) = play(row,col,board,current_player,current_winner, n_play,player_1,player_2,empty)
+		robot_action(current_winner, poppy,robot,empty)
 		print_board(board)
 		human_move = False
 		if(current_winner == empty):
@@ -76,7 +77,8 @@ while(1):
 		(board, current_winner, current_player) = play(row,col,board,current_player,current_winner,n_play,player_1,player_2,empty)
 		
 		robot_play(n_play,robot,player_1,player_2,row,col,poppy)
-		
+		robot_action(current_winner, poppy,robot,empty)
+
 		print_board(board)
 		robot_move = False
 		if(robot == player_1 and first_move):
@@ -84,6 +86,8 @@ while(1):
 		polling = True
 	if(reset_move):
 		(robot, board, n_play, current_winner, current_player,first_move) = reset(player_1,player_2,empty,poppy_player_number)
+		initial_pos(poppy)
+		wave(poppy)
 		initial_pos(poppy)
 		reset_move = False
 		polling = True

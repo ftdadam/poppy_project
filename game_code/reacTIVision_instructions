@@ -1,3 +1,17 @@
-cd usr/local/src/reacTIVision/linux
+cd /usr/local/src/reacTIVision/linux
 sudo ./reacTIVision
+
+finger sensitivity = 0
+finger size = 0
+finger blobs = 0
+blob size = 66
+gradient gate = 8-15
+tile size = 2-4
+
+
+connect raspberry pi to laptop with Ethernet.
+Go the edit connection setting in the network settings, at the taskbar.
+Navigate to ipv4 option. Select method : shared to other computer.
+Then open command prompt and type command >"cat /var/lib/misc/dnsmasq.leases". You will get raspberry pi Ip from that.
+then open command prompt and type: ssh pi@"ip of raspberry pi"
 
