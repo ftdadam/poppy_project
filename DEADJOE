@@ -1,0 +1,27 @@
+
+*** These modified files were found in JOE when it aborted on Thu Jun 21 16:13:49 2018
+*** JOE was aborted because the terminal closed
+
+*** Fichier '/home/user/Documents/poppy_project/.git/MERGE_MSG'
+Merge branch 'master' of https://github.com/ftdargentina/poppy_project
+
+# Veuillez entrer un message de validation pour expliquer en quoi cette fusion est
+# nécessaire, surtout si cela fusionne une branche amont mise à jour dans une branche de sujet.
+#
+# Les lignes commençant par '#' seront ignorées, et un message vide
+# abandonne la validation.
+
+*** Fichier '(Sans nom)'
+/usr/share/reacTIVision/reacTIVision.xml
+/usr/share/reacTIVision/reacTIVision.xml
+.bashrc
+!pwd
+/home/user/Documents/poppy_project/.git/MERGE_MSG
+/home/user/Documents/poppy_project/.git/MERGE_MSG
+/home/user/Documents/poppy_project/.git/MERGE_MSG
+
+*** Fichier '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc

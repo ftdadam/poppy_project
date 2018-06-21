@@ -49,15 +49,6 @@ def check_win(board,current_player):
 	if(board[0][2] == current_player and board[1][1] == current_player and board[2][0] == current_player):
 		isWin = True
 	return isWin
-
-# def set_poppy_player(player_1, player_2):
-# 	value = int(raw_input("Player Number for Poppy (1 or 2): << "))
-# 	while(value != 1 and value != 2):
-# 		value = int(raw_input("Incorrect number, try again (1 or 2): << "))
-# 	if(value == 1):
-# 		return player_1
-# 	else:
-# 		return player_2
 	
 def reset(player_1,player_2,empty,poppy_player_number):
 	current_player = player_1
@@ -207,9 +198,6 @@ def move_sd(board,empty):
 			row, col = i, 2-i
 			return row, col	
 
-
-
-
 # FUNCTION THAT MAKES THE MOVEMENT
 
 def make_move(board,robot,empty,player_1,player_2):
@@ -229,7 +217,3 @@ def make_move(board,robot,empty,player_1,player_2):
 		row = randint(0,2)
 		col = randint(0,2)
 	return row, col
-# def make_move(board,robot,empty,player_1,player_2):
-# 	row = randint(0,2)
-# 	col = randint(0,2)
-# 	return row, col
