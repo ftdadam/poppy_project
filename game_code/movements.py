@@ -42,7 +42,7 @@ def initial_pos(poppy):
 
 def wave(poppy):
 	em_control(0)
-	mov_time = 2
+	mov_time = 1.5
 	for i in range(0,3):
 		motor_angles = [0.75, 5.13, 42.77, 3.56, 0.22, -5.43, 0.09, -35.71, 39.58, 46.81, -68.02, -170.92, 2.0, -12.88, 15.76]
 		move_robot(poppy,motor_angles,mov_time)
