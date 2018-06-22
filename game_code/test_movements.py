@@ -44,7 +44,8 @@ for m in poppy.motors:
 	m.compliant=False
 
 #set grovepi+ port 4 as output
-
+motor_angles = [0,0,45,0,5,-5,0,-10,15,20,-10,-180,0,-20,0]
+mov_time=1.5
 electromagnet = 4
 pinMode(electromagnet,"OUTPUT")
 time.sleep(1)
