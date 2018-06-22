@@ -53,11 +53,11 @@ class Table(FloatLayout):
 				mx,my=a*motionevent.pos[0],motionevent.pos[1]+dy
 
 
-				# ### Here we draw a green point where the flucidal is
-				# with self.canvas:
-				# 	Color(0,1,0)
-				# 	d=3.
-				# 	Ellipse(pos=(mx-d /2,my-d/2),size=(d,d))
+				### Here we draw a green point where the flucidal is
+				with self.canvas:
+					Color(0,1,0)
+					d=3.
+					Ellipse(pos=(mx-d /2,my-d/2),size=(d,d))
 
 				
 
